@@ -29,17 +29,17 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<Person> getPersonsByCity(String city) {
-        return personsRepository.getAllByCityIgnoreCase(city);
+        return personsRepository.getAllPersonsByCity(city);
     }
 
     @Override
     public List<Person> getPersonsByAgeLessThan(int age) {
-        return personsRepository.getAllByAgeLessThan(age);
+        return personsRepository.getAllPersonsByAgeLessThan(age);
     }
 
     @Override
     public Person getPersonByNameAndSurname(String name, String surname) {
-        Optional<Person> personOptional = personsRepository.getPersonByNameAndSurname(name, surname);
+        Optional<Person> personOptional = personsRepository.getPersonByFullName(name, surname);
 
         if (personOptional.isEmpty()) {
             throw new DataNotFoundException(String.format("No found person! For this name: %s, surname: %s", name, surname));
