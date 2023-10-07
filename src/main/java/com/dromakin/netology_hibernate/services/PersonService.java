@@ -15,9 +15,14 @@ package com.dromakin.netology_hibernate.services;
 import com.dromakin.netology_hibernate.model.Person;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PersonService {
 
     List<Person> getPersonsByCity(String city);
+
+    List<Person> getPersonsByAgeLessThan(int age);
+
+    Person getPersonByNameAndSurname(String name, String surname);
 
 }

@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 public class PersonsController {
 
     private final PersonService service;
+
     @GetMapping("by-city")
     @ResponseBody
     public List<PersonDTO> getByCity(@RequestParam String city) {
@@ -32,4 +33,37 @@ public class PersonsController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("age-less-then")
+    @ResponseBody
+    public List<PersonDTO> getByAgeLessThen(@RequestParam int age) {
+        List<Person> persons = service.getPersonsByAgeLessThan(age);
+        return persons.stream()
+                .map(
+                        x -> PersonDTO.builder()
+                                .id(x.getId())
+                                .name(x.getName())
+                                .surname(x.getSurname())
+                                .age(x.getAge())
+                                .phoneNumber(x.getPhoneNumber())
+                                .city(x.getCity())
+                                .build())
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("by-name-surname")
+    @ResponseBody
+    public PersonDTO getByNameAndSurname(
+            @RequestParam String name,
+            @RequestParam String surname
+    ) {
+        Person person = service.getPersonByNameAndSurname(name, surname);
+        return PersonDTO.builder()
+                .id(person.getId())
+                .name(person.getName())
+                .surname(person.getSurname())
+                .age(person.getAge())
+                .phoneNumber(person.getPhoneNumber())
+                .city(person.getCity())
+                .build();
+    }
 }
