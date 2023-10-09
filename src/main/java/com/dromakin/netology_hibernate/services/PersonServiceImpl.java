@@ -41,7 +41,7 @@ public class PersonServiceImpl implements PersonService {
     public Person getPersonByNameAndSurname(String name, String surname) {
         Optional<Person> personOptional = personsRepository.getPersonByFullName(name, surname);
 
-        if (personOptional.isEmpty()) {
+        if (!personOptional.isPresent()) {
             throw new DataNotFoundException(String.format("No found person! For this name: %s, surname: %s", name, surname));
         }
 

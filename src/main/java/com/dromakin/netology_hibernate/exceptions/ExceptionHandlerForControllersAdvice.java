@@ -23,7 +23,7 @@ public class ExceptionHandlerForControllersAdvice {
 
     @ExceptionHandler(DataNotFoundException.class)
     public ResponseEntity<ErrorResponseDTO> handleException(DataNotFoundException exception) {
-        var error = ErrorResponseDTO.builder()
+        ErrorResponseDTO error = ErrorResponseDTO.builder()
                 .message("No data: " + exception)
                 .build();
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);

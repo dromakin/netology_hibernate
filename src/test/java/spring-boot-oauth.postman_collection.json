@@ -1,0 +1,410 @@
+{
+	"info": {
+		"_postman_id": "97fb1ef7-34d0-4348-b548-a86e6a18f003",
+		"name": "spring-boot-oauth-2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9165319"
+	},
+	"item": [
+		{
+			"name": "/oauth/token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "spring-security-oauth2-read-write-client-password1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "spring-security-oauth2-read-write-client",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin1234",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "spring-security-oauth2-read-write-client",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_url}}/oauth/token",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/oauth/token reader",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "spring-security-oauth2-read-write-client-password1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "spring-security-oauth2-read-write-client",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "reader",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "reader1234",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "spring-security-oauth2-read-write-client",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_url}}/oauth/token",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/oauth/check_token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "spring-security-oauth2-read-write-client-password1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "spring-security-oauth2-read-write-client",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server_url}}/oauth/check_token?token=fa956a7f-f114-4531-97d7-4b9ca5ff5c7b",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"oauth",
+						"check_token"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "fa956a7f-f114-4531-97d7-4b9ca5ff5c7b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/persons/check-username OK",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer fa956a7f-f114-4531-97d7-4b9ca5ff5c7b"
+					}
+				],
+				"url": {
+					"raw": "{{server_url}}/api/persons/check-username?username=admin",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"api",
+						"persons",
+						"check-username"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/persons/check-username !OK",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer fa956a7f-f114-4531-97d7-4b9ca5ff5c7b"
+					}
+				],
+				"url": {
+					"raw": "{{server_url}}/api/persons/check-username?username=reader",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"api",
+						"persons",
+						"check-username"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "reader"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/persons/by-city OK",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer fa956a7f-f114-4531-97d7-4b9ca5ff5c7b"
+					}
+				],
+				"url": {
+					"raw": "{{server_url}}/api/persons/by-city?city=moscow",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"api",
+						"persons",
+						"by-city"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "moscow"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/persons/by-city OK 2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer a829957b-4cf2-4aa3-b9d3-565aabe27d6e"
+					}
+				],
+				"url": {
+					"raw": "{{server_url}}/api/persons/by-city?city=moscow",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"api",
+						"persons",
+						"by-city"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "moscow"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/persons/age OK",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer fa956a7f-f114-4531-97d7-4b9ca5ff5c7b"
+					}
+				],
+				"url": {
+					"raw": "{{server_url}}/api/persons/age-less-then?age=30",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"api",
+						"persons",
+						"age-less-then"
+					],
+					"query": [
+						{
+							"key": "age",
+							"value": "30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/persons/by-name-surname OK",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer fa956a7f-f114-4531-97d7-4b9ca5ff5c7b"
+					}
+				],
+				"url": {
+					"raw": "{{server_url}}/api/persons/by-name-surname?name=Elle&surname=Thomson",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"api",
+						"persons",
+						"by-name-surname"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Elle"
+						},
+						{
+							"key": "surname",
+							"value": "Thomson"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/persons/by-name-surname !OK",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer a829957b-4cf2-4aa3-b9d3-565aabe27d6e"
+					}
+				],
+				"url": {
+					"raw": "{{server_url}}/api/persons/by-name-surname?name=Elle&surname=Thomson",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"api",
+						"persons",
+						"by-name-surname"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Elle"
+						},
+						{
+							"key": "surname",
+							"value": "Thomson"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server_url",
+			"value": "server_url",
+			"type": "string"
+		}
+	]
+}

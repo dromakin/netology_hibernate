@@ -16,7 +16,7 @@ import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.*;
-import org.springdoc.core.models.GroupedOpenApi;
+import org.springdoc.core.GroupedOpenApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,16 +35,32 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .components(new Components()
-                        .addSecuritySchemes(AUTH_SECURITY_SCHEME, new SecurityScheme()
-                                .type(SecurityScheme.Type.OAUTH2)
-                                .description("Oauth2 flow")
-                                .flows(new OAuthFlows()
-                                        .clientCredentials(new OAuthFlow()
-                                                .tokenUrl("http://localhost:8080" + "/oauth/token")
-                                                .scopes(new Scopes()
-                                                        .addString("read", "for read operations")
-                                                        .addString("write", "for write operations")
-                                                ))))
+                                .addSecuritySchemes(AUTH_SECURITY_SCHEME, new SecurityScheme()
+                                                .type(SecurityScheme.Type.OAUTH2)
+                                                .description("Oauth2 flow")
+                                                .flows(new OAuthFlows()
+                                                                .password(new OAuthFlow()
+                                                                        .tokenUrl("http://localhost:8080" + "/oauth/token")
+                                                                        .scopes(new Scopes()
+                                                                                .addString("read", "for read operations")
+                                                                                .addString("write", "for write operations"))
+                                                                )
+//                                        .authorizationCode(
+//                                                new OAuthFlow()
+//                                                        .tokenUrl("http://localhost:8080" + "/oauth/token")
+//                                                        .scopes(new Scopes()
+//                                                                .addString("read", "for read operations")
+//                                                                .addString("write", "for write operations")
+//                                                        )
+//                                        )
+                                                                .clientCredentials(new OAuthFlow()
+                                                                        .tokenUrl("http://localhost:8080" + "/oauth/token")
+                                                                        .scopes(new Scopes()
+                                                                                .addString("read", "for read operations")
+                                                                                .addString("write", "for write operations")
+                                                                        ))
+                                                )
+                                )
                 )
                 .security(Arrays.asList(
                         new SecurityRequirement().addList("spring_oauth")))

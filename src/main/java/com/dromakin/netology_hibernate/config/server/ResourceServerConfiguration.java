@@ -22,13 +22,22 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/actuator/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
-                .requestMatchers("/api/persons/by-city").hasRole("READ")
-                .requestMatchers("/api/persons/age-less-then").hasRole("WRITE")
-                .requestMatchers("/api/persons/by-name-surname").hasAnyRole("WRITE", "DELETE")
-                .requestMatchers("/api/persons/check-username").hasAnyRole("WRITE", "DELETE", "READ")
-                .anyRequest().authenticated()
-        );
+
+        http.authorizeRequests()
+                .antMatchers("/actuator/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
+                .antMatchers("/api/persons/by-city").hasAuthority("READ")
+                .antMatchers("/api/persons/age-less-then").hasAuthority("WRITE")
+                .antMatchers("/api/persons/by-name-surname").hasAnyAuthority("WRITE", "DELETE")
+                .antMatchers("/api/persons/check-username").hasAnyAuthority("WRITE", "DELETE", "READ")
+                .anyRequest().access(SECURED_READ_SCOPE);
+
+//        http.authorizeHttpRequests((requests) -> requests
+//                .requestMatchers("/actuator/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
+//                .requestMatchers("/api/persons/by-city").hasRole("READ")
+//                .requestMatchers("/api/persons/age-less-then").hasRole("WRITE")
+//                .requestMatchers("/api/persons/by-name-surname").hasAnyRole("WRITE", "DELETE")
+//                .requestMatchers("/api/persons/check-username").hasAnyRole("WRITE", "DELETE", "READ")
+//                .anyRequest().authenticated()
+//        );
     }
 }

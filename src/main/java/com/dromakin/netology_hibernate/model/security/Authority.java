@@ -1,7 +1,6 @@
 package com.dromakin.netology_hibernate.model.security;
 
-import jakarta.persistence.*;
-import jakarta.persistence.UniqueConstraint;
+import javax.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

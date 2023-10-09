@@ -1,10 +1,10 @@
 package com.dromakin.netology_hibernate.model.security;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
